@@ -9,7 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-
+use App\Models\Role;
+use App\Models\Module;
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -58,4 +59,12 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+    public function module()
+    {
+        return $this->belongsToMany(Module::class)>withTimestamps();
+    }
 }
